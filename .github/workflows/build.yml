@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     name: CoilPy build
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.8'
+        python-version: '3.11'
 
     - name: Get pip cache dir
       id: pip-cache
@@ -24,7 +24,7 @@ jobs:
         echo "::set-output name=dir::$(pip cache dir)"
 
     - name: Cache pip
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       id: cache-pip
       with:
         # This path is specific to Ubuntu
@@ -53,7 +53,7 @@ jobs:
         echo "install coilpy"
         pip --version
         cd ${GITHUB_WORKSPACE}
-        python setup.py develop
+        pip install -v .
         python3 -c "from coilpy import *"
 
     - name: Test
