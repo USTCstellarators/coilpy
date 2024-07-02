@@ -3,7 +3,8 @@ requires = [
     "setuptools>=42",
     "setuptools_scm[toml]>=3.4",
     "wheel",
-    "oldest-supported-numpy; python_version>='3.5'",
+    "numpy>=2.0; python_version<'3.8'",
+    "oldest-supported-numpy; python_version>='3.8'",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -14,5 +15,32 @@ manylinux-x86_64-image = "manylinux2014"
 # [tool.setuptools_scm]
 # write_to = "/coilpy/_version.py"
 
-# This should be before-test, and install_requirements should be used
-before-build = "pip install -r requirements.txt"
+
+[project]
+name = "coilpy"
+version = "0.4.01"
+description = "Plotting and data processing tools for plasma and coil"
+readme = "README.md"
+authors = [
+    { name = "Caoxiang Zhu", email = "caoxiangzhu@gmail.com" },
+]
+license = "GNU 3.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "scipy",
+    "xarray",
+    "h5py",
+    "matplotlib",
+    "pandas",
+    "plotly",
+    "numpy",
+    "pyevtk",
+    "classes",
+    "f90nml",
+    "meshio",
+]
