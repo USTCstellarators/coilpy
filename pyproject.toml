@@ -1,12 +1,12 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "setuptools_scm[toml]>=3.4",
-    "wheel",
+    "meson",
+    "meson-python", 
+    "ninja", 
     "numpy>=2.0; python_version<'3.8'",
     "oldest-supported-numpy; python_version>='3.8'",
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "mesonpy"
 
 [tool.cibuildwheel]
 manylinux-i686-image = "manylinux2014"
@@ -24,7 +24,10 @@ readme = "README.md"
 authors = [
     { name = "Caoxiang Zhu", email = "caoxiangzhu@gmail.com" },
 ]
-license = "GNU 3.0"
+maintainers = [
+    { name = "Caoxiang Zhu", email = "caoxiangzhu@gmail.com" },
+]
+license = {text = "GNU 3.0"}
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
