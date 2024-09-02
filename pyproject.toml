@@ -1,24 +1,16 @@
 [build-system]
+build-backend = "mesonpy"
 requires = [
     "meson",
     "meson-python", 
-    "ninja", 
-    "numpy>=2.0; python_version<'3.8'",
-    "oldest-supported-numpy; python_version>='3.8'",
+    "wheel", 
+    "numpy>=2.0; python_version>'3.8'",
+    "oldest-supported-numpy; python_version<='3.8'",
 ]
-build-backend = "mesonpy"
-
-[tool.cibuildwheel]
-manylinux-i686-image = "manylinux2014"
-manylinux-x86_64-image = "manylinux2014"
-
-# [tool.setuptools_scm]
-# write_to = "/coilpy/_version.py"
-
 
 [project]
 name = "coilpy"
-version = "0.4.02"
+dynamic = ["version"]
 description = "Plotting and data processing tools for plasma and coil"
 readme = "README.md"
 authors = [
@@ -47,3 +39,14 @@ dependencies = [
     "f90nml",
     "meshio",
 ]
+
+
+[tool.cibuildwheel]
+manylinux-i686-image = "manylinux2014"
+manylinux-x86_64-image = "manylinux2014"
+
+[tool.cibuildwheel.macos]
+before-build = "bash {project}/python/build_tools/cibw_before_build_macos.sh"
+
+[tool.cibuildwheel.windows]
+repair-wheel-command = "bash python/build_tools/cibw_repair_wheel_command_windows.sh {wheel} {dest_dir}"
