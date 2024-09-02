@@ -18,7 +18,7 @@ manylinux-x86_64-image = "manylinux2014"
 
 [project]
 name = "coilpy"
-version = "0.4.01"
+version = "0.4.02"
 description = "Plotting and data processing tools for plasma and coil"
 readme = "README.md"
 authors = [
