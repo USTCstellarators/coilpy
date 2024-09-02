@@ -4,66 +4,19 @@ on:
   push:
     branches:
       - master
+      - update_install
 
 jobs:
-  build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v2.2.2
-        env:
-          # Only build for python 3.{8,9,10,11,12}
-          CIBW_BUILD : cp3{8,9,10,11,12}-*
-          # Skip 32-bit builds
-          CIBW_SKIP: "*-win32 *-manylinux_i686 *-musllinux*"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./wheelhouse/*.whl
-
-
-  build_sdist:
-    name: Build source distribution
+  pypi-publish:
+    name: Upload release to PyPI
     runs-on: ubuntu-latest
-
+    environment:
+      name: pypi
+      url: https://pypi.org/p/coilpy
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
-      - uses: actions/checkout@v4
-        
-      - name: Build sdist
-        run: pipx run build --sdist
-        
-      - uses: actions/upload-artifact@v4
-        with:
-          path: dist/*.tar.gz
+    # retrieve your distributions here
 
-
-  upload_pypi:
-    needs: [build_wheels, build_sdist]
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Cache publish
-        uses: actions/cache@v2
-        id: cache-pypi
-        with:
-          # This path is specific to Ubuntu
-          path: ${{ github.workspace }}
-          # Look to see if there is a cache hit for the corresponding requirements file
-          key: ${{ runner.os }}-pypi-${{ hashFiles('coilpy/__init__.py') }}
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifact
-          path: dist
-
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        # if: steps.cache-pypi.outputs.cache-hit != 'true'  # should use git tags or github releases!
-        with:
-          user: ${{ secrets.PYPI_USERNAME }}  # should be __token__
-          password: ${{ secrets.PYPI_PASSWORD }}
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
