@@ -24,7 +24,7 @@ jobs:
       with:
         python-version: "3.x"
     - name: Install dependencies
-      run: pip install cibuildwheel==2.15.1 twine
+      run: pip install cibuildwheel twine
 
     - name: Build wheels
       run: cibuildwheel --output-dir dist
