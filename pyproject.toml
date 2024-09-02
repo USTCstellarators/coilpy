@@ -42,7 +42,7 @@ dependencies = [
 
 [tool.cibuildwheel]
 build = "*"
-skip = ""
+skip = "cp3{6,7,8}-*"
 test-skip = ""
 free-threaded-support = false
 
