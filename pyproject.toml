@@ -5,7 +5,7 @@ requires = [
     "meson-python", 
     "wheel", 
     "numpy>=2.0; python_version>'3.8'",
-    "oldest-supported-numpy; python_version<='3.8'",
+    # "oldest-supported-numpy; python_version<='3.8'",
 ]
 
 [project]
