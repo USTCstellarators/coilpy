@@ -41,7 +41,7 @@ dependencies = [
 ]
 
 [tool.cibuildwheel]
-build = "*"
+build = "*p3{9,13}-*"
 skip = ["cp3{6,7,8}-*", "pp*", "*-win32"]
 test-skip = ""
 free-threaded-support = false
