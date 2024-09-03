@@ -41,8 +41,8 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         # to supply options, put them in 'env', like:
-        # env:
-        #   CIBW_SOME_OPTION: value
+        env:
+          CIBW_ENVIRONMENT: "MACOSX_DEPLOYMENT_TARGET='12.0'"
 
       - uses: actions/upload-artifact@v4
         with:
