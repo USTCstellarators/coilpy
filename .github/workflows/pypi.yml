@@ -44,7 +44,7 @@ jobs:
         env:
           CIBW_ENVIRONMENT: "MACOSX_DEPLOYMENT_TARGET='12.0'"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
@@ -61,7 +61,7 @@ jobs:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: cibw-sdist
         path: dist/*.tar.gz          
@@ -78,7 +78,7 @@ jobs:
     steps:
     # retrieve your distributions here
       - name: Download all the dists
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           pattern: cibw-*
           path: dist
