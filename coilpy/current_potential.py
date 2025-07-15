@@ -153,12 +153,18 @@ class Regcoil(Netcdf):
         from coilpy_fortran import surface_current
 
         pos = np.atleast_2d(pos)
+        npos = pos.shape[0]
+        assert pos.shape[1]==3,  "The pos array should be in the shape of (npos,3)"
+        bxyz = np.zeros_like(pos)
         dtdz = (self.theta_coil[1] - self.theta_coil[0]) * (
             self.zeta_coil[1] - self.zeta_coil[0]
         )
-        return surface_current(
-            pos, self.r_coil, self.k.T, self.norm_normal_coill.T, dtdz
+        nzeta, ntheta = self.norm_normal_coill.T.shape
+        surface_current(
+            pos, self.r_coil, self.k.T, self.norm_normal_coill.T, dtdz, \
+                  bxyz, npos, nzeta, ntheta
         )
+        return bxyz
 
     def bfield_cyl(self, rpz):
         rpz = np.atleast_2d(rpz)

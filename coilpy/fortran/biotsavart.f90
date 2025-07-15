@@ -45,7 +45,7 @@ SUBROUTINE biot_savart(pos, coilxyz, current, dl, bfield, npos, nseg)
 END SUBROUTINE biot_savart
 
 SUBROUTINE hanson_hirshman(pos, coilxyz, current, bfield, npos, nseg)
-   ! Calculate magnetic field using the Hanse-Hirshman expression
+   ! Calculate magnetic field using the Hanson-Hirshman expression
    !
    ! input params:
    !       pos(npos,3): double, positions to be evaluated
