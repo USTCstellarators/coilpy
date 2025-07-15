@@ -8,7 +8,7 @@ The repository is available at https://github.com/USTCstellarators/coilpy.
 
 For full documenation, please check https://zhucaoxiang.github.io/CoilPy/api/coilpy.html.
 """
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 
 # local packages
 from .misc import *
