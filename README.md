@@ -3,7 +3,7 @@ CoilPy
 
 This is Caoxiang Zhu's personal Python package for plotting and data processing.
 It includes functions to parse coils, surface, STELLOPT, VMEC, etc.
-Documentation can be found at https://zhucaoxiang.github.io/CoilPy/
+Documentation can be found at https://github.com/USTCstellarators/coilpy.
 
 Install
 =======
