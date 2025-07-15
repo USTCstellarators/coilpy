@@ -232,7 +232,7 @@ class Mgrid(object):
         mag_xyz = bfield(xyz)
         br = np.reshape(mag_xyz[:, 0] * cosphi + mag_xyz[:, 1] * sinphi, rzp_grid)
         bphi = np.reshape(
-            (-mag_xyz[:, 0] * sinphi + mag_xyz[:, 1] * cosphi) / rr.ravel(), rzp_grid
+            (-mag_xyz[:, 0] * sinphi + mag_xyz[:, 1] * cosphi), rzp_grid
         )
         bz = np.reshape(mag_xyz[:, 2], rzp_grid)
         # construct class

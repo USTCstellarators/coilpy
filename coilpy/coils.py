@@ -119,14 +119,25 @@ class SingleCoil(object):
         from coilpy_fortran import hanson_hirshman
 
         xyz = np.transpose([self.x, self.y, self.z])
-        return hanson_hirshman(pos, xyz, self.I)
+        pos = np.atleast_2d(pos).astype('float64')
+        bxyz = np.zeros_like(pos)
+        npos = pos.shape[0]
+        nseg = xyz.shape[0]
+        assert pos.shape[1]==3,  "The pos array should be in the shape of (npos,3)"
+        hanson_hirshman(pos, xyz, self.I, bxyz, npos, nseg)
+        return bxyz
 
     def biot_savart(self, pos):
         from coilpy_fortran import biot_savart
 
         xyz = np.transpose([self.x, self.y, self.z])
         dxyz = np.transpose([self.xt * self.dt, self.yt * self.dt, self.zt * self.dt])
-        return biot_savart(pos, xyz[:-1, :], self.I, dxyz[:-1, :])
+        pos = np.atleast_2d(pos).astype('float64')
+        bxyz = np.zeros_like(pos)
+        npos = pos.shape[0]
+        nseg = xyz.shape[0] - 1 # should have one less point
+        assert pos.shape[1]==3,  "The pos array should be in the shape of (npos,3)"
+        return biot_savart(pos, xyz[:-1, :], self.I, dxyz[:-1, :], bxyz, npos, nseg)
 
     def fourier_tangent(self):
         """
@@ -242,7 +253,7 @@ class SingleCoil(object):
         except ValueError:
             return
 
-    def plot(self, engine="mayavi", fig=None, ax=None, show=True, **kwargs):
+    def plot(self, engine="plotly", fig=None, ax=None, show=True, **kwargs):
         """Plot the coil in a specified engine.
 
         Args:
@@ -856,13 +867,16 @@ class Coil(object):
                                   "biot_savart": Native Biot-Savart with tagent pre-calculated.
                                                  The tangent can be computed using `SingleCoil.fourier_tanget`
                                                  or `SingleCoil.spline_tanget` (with different orders).
+                                  "bfield_HH": Hanson-Hirshman expression from python
                                   Defaults to "hanson_hirshman".
 
         Returns:
             array_like: The computed magnetic field, shape (npoints,3).
         """
-        pos = np.atleast_2d(pos)
+        pos = np.atleast_2d(pos).astype('float64')
         mag = np.zeros_like(pos)
+        assert method in ["hanson_hirshman", "biot_savart", "bfield_HH"], \
+              "method should be one of ['hanson_hirshman', 'biot_savart', 'bfield_HH']"
         for icoil in list(self):
             func = getattr(icoil, method)
             mag += func(pos)

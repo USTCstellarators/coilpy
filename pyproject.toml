@@ -1,24 +1,16 @@
 [build-system]
+build-backend = "mesonpy"
 requires = [
     "meson",
     "meson-python", 
-    "ninja", 
-    "numpy>=2.0; python_version<'3.8'",
-    "oldest-supported-numpy; python_version>='3.8'",
+    "wheel", 
+    "numpy>=2.0; python_version>'3.8'",
+    "oldest-supported-numpy; python_version<='3.8'",
 ]
-build-backend = "mesonpy"
-
-[tool.cibuildwheel]
-manylinux-i686-image = "manylinux2014"
-manylinux-x86_64-image = "manylinux2014"
-
-# [tool.setuptools_scm]
-# write_to = "/coilpy/_version.py"
-
 
 [project]
 name = "coilpy"
-version = "0.4.01"
+dynamic = ["version"]
 description = "Plotting and data processing tools for plasma and coil"
 readme = "README.md"
 authors = [
@@ -47,3 +39,39 @@ dependencies = [
     "f90nml",
     "meshio",
 ]
+
+[tool.cibuildwheel]
+build = ["cp3*-manylinux_x86_64", "cp3*-manylinux_x86_64", "cp3*-macosx*", "cp3*-win*"]
+skip = ["cp3{6,7,8}-*", "pp*", "*-win32"]
+test-skip = ""
+free-threaded-support = false
+
+archs = ["auto"]
+build-frontend = "default"
+config-settings = {}
+dependency-versions = "pinned"
+environment = {}
+environment-pass = []
+build-verbosity = 3
+
+before-all = ""
+before-build = ""
+repair-wheel-command = ""
+
+test-command = ""
+before-test = ""
+test-requires = []
+test-extras = []
+
+container-engine = "docker"
+
+manylinux-x86_64-image = "manylinux2014"
+manylinux-i686-image = "manylinux2014"
+
+[tool.cibuildwheel.linux]
+repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
+
+# [tool.cibuildwheel.macos]
+# repair-wheel-command = "delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
+
+[tool.cibuildwheel.windows]
