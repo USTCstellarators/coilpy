@@ -314,7 +314,7 @@ class Dipole(object):
 
         from .surface import FourSurf
 
-        wind = FourSurf.read_winding_surfce(winding)
+        wind = FourSurf.read_winding_surface(winding)
         data = wind.xyz(tv, zv, normal=True)
         phi = func_new(tv, zv)
         ox = data[0]

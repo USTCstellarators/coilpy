@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 from .misc import read_focus_boundary, write_focus_boundary
 
@@ -249,7 +251,7 @@ class FourSurf(object):
         return cls(xm=xm, xn=xn, rbc=rbc, rbs=rbs, zbc=zbc, zbs=zbs)
 
     @classmethod
-    def read_winding_surfce(cls, filename, mpol=9999, ntor=9999):
+    def read_winding_surface(cls, filename, mpol=9999, ntor=9999):
         """initialize surface from the NESCOIL format input file 'nescin.xxx'
 
         Parameters:
@@ -305,6 +307,16 @@ class FourSurf(object):
                 zbc=np.array(zbc),
                 zbs=np.array(zbs),
             )
+
+    @classmethod
+    def read_winding_surfce(cls, filename, mpol=9999, ntor=9999):
+        warnings.warn(
+            "FourSurf.read_winding_surfce is deprecated; use "
+            "FourSurf.read_winding_surface instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return cls.read_winding_surface(filename, mpol=mpol, ntor=ntor)
 
     def rz(self, theta, zeta, normal=False):
         """get r,z position of list of (theta, zeta)
