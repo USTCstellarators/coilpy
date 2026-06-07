@@ -89,15 +89,15 @@ def toroidal_period(vec, nfp=1):
 def print_progress(
     iteration, total, prefix="Progress", suffix="Complete", decimals=1, bar_length=60
 ):
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        bar_length  - Optional  : character length of bar (Int)
+    """Create a terminal progress bar for iterative jobs.
+
+    Args:
+        iteration (int): Current iteration index.
+        total (int): Total number of iterations.
+        prefix (str, optional): Prefix shown before the bar. Defaults to ``"Progress"``.
+        suffix (str, optional): Suffix shown after the percentage. Defaults to ``"Complete"``.
+        decimals (int, optional): Decimal places for the percentage display. Defaults to 1.
+        bar_length (int, optional): Character width of the progress bar. Defaults to 60.
     """
     str_format = "{0:." + str(decimals) + "f}"
     percents = str_format.format(100 * (iteration / float(total)))
@@ -179,18 +179,17 @@ def vmecMN(mpol, ntor):
 
 
 def trigfft(y, tr=-1):
-    """calculate trigonometric coefficients using FFT
-    Assuming the periodicity is 2*pi
-    params:
-        y -- 1D array for Fourier transformation
-        tr -- Truncation number (default: -1)
-    return:
-        a dict containing
-        'n' -- index
-        'rcos' -- cos coefficients of the real part
-        'rsin' -- sin coefficients of the real part
-        'icos' -- cos coefficients of the imag part
-        'isin' -- sin coefficients of the imag part
+    """Calculate trigonometric coefficients using FFT.
+
+    The signal is assumed to have a periodicity of ``2*pi``.
+
+    Args:
+        y (array_like): One-dimensional array for Fourier transformation.
+        tr (int, optional): Truncation number. Defaults to -1.
+
+    Returns:
+        dict: Fourier coefficients with the keys ``n``, ``rcos``, ``rsin``,
+        ``icos``, and ``isin``.
     """
     from scipy.fftpack import fft
 
@@ -227,18 +226,16 @@ def trigfft(y, tr=-1):
 
 
 def trigfft2(y):
-    """calculate trigonometric coefficients using FFT
-    Assuming the periodicity is 2*pi
-    params:
-        y -- 2D array for Fourier transformation
-    return:
-        a dict containing
-        'n' -- 1D array, n index
-        'm' -- 1D array, m index
-        'rcos' -- 2D array, cos coefficients of the real part
-        'rsin' -- 2D array, sin coefficients of the real part
-        'icos' -- 2D array, cos coefficients of the imag part
-        'isin' -- 2D array, sin coefficients of the imag part
+    """Calculate two-dimensional trigonometric coefficients using FFT.
+
+    The signal is assumed to have a periodicity of ``2*pi`` in both directions.
+
+    Args:
+        y (array_like): Two-dimensional array for Fourier transformation.
+
+    Returns:
+        dict: Fourier coefficients with the keys ``n``, ``m``, ``rcos``,
+        ``rsin``, ``icos``, and ``isin``.
     """
     from scipy.fftpack import fft2, fftshift
 
@@ -867,7 +864,7 @@ def scan_focus(template, key, value, run=False):
     """Scan input variable of FOCUS
 
     Args:
-        template (str): a template input file (*.input).
+        template (str): A template input file such as ``*.input``.
         key (str): the variable name that will be scanned.
         value (list): the loop that the scan is going to take.
         run (bool, optional): whether you want to run the scan immediately. Defaults to False.

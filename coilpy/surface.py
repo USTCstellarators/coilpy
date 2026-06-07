@@ -64,10 +64,10 @@ class FourSurf(object):
 
     @classmethod
     def read_spec_input(cls, filename, tol=1e-8):
-        """initialize surface from the SPEC input file '*.sp'
+        """Initialize a surface from a SPEC input file.
 
         Parameters:
-          filename -- string, path + name to the FOCUS input boundary file
+          filename -- string, path + name to the SPEC boundary file such as ``*.sp``
           mpol -- maximum truncated poloidal mode number (default: 9999)
           ntor -- maximum truncated toroidal mode number (default: 9999)
 

@@ -6,7 +6,7 @@ magnetic dipoles, STELLOPT, VMEC, BOOZ_XFORM, etc.
 
 The repository is available at https://github.com/USTCstellarators/coilpy.
 
-For full documenation, please check https://zhucaoxiang.github.io/CoilPy/api/coilpy.html.
+For full documentation, please check https://ustcstellarators.github.io/coilpy/.
 """
 __version__ = "0.4.3"
 

@@ -410,7 +410,7 @@ class STELLout(SortedDict, OMFITascii):
         logical_not=False,
         **kwargs
     ):
-        """Plot |B| components in Boozer coordinates from BOOZ_XFORM
+        """Plot :math:`|B|` components in Boozer coordinates from BOOZ_XFORM.
 
         Args:
             it (int, optional): Iteration index to be plotted. Defaults to -1.
@@ -418,7 +418,7 @@ class STELLout(SortedDict, OMFITascii):
             mn (tuple, optional): Plot the particular (m,n) mode. Defaults to (None, None).
             ax (Matplotlib axis, optional): Matplotlib axis to be plotted on. Defaults to None.
             log (bool, optional): Plot in log scale. Defaults to True.
-            normalize(bool, optionl): Normalized to B_00. Defaults to False.
+            normalize(bool, optionl): Normalize to ``B_00``. Defaults to False.
             logical_not (bool, optional): Unselect mn modes. Defaults to False.
             kwargs (dict): Keyword arguments for matplotlib.pyplot.plot. Defaults to {}.
 

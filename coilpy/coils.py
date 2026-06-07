@@ -862,13 +862,11 @@ class Coil(object):
 
         Args:
             pos (array_like): Evaluation points, shape is (npoints,3) or (3,).
-            method (str, optional): Biot-Savrt computing function. one of the follows:
-                                  "hanson_hirshman": Hanson-Hirshman expression.
-                                  "biot_savart": Native Biot-Savart with tagent pre-calculated.
-                                                 The tangent can be computed using `SingleCoil.fourier_tanget`
-                                                 or `SingleCoil.spline_tanget` (with different orders).
-                                  "bfield_HH": Hanson-Hirshman expression from python
-                                  Defaults to "hanson_hirshman".
+            method (str, optional): Biot-Savart evaluation method. Supported values are
+                ``"hanson_hirshman"``, ``"biot_savart"``, and ``"bfield_HH"``.
+                ``"biot_savart"`` expects tangents precomputed with
+                ``SingleCoil.fourier_tangent`` or ``SingleCoil.spline_tangent``.
+                Defaults to ``"hanson_hirshman"``.
 
         Returns:
             array_like: The computed magnetic field, shape (npoints,3).

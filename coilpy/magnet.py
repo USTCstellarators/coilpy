@@ -120,8 +120,8 @@ def corner2magnet(corner_file, moment_file, Br=1.4, reset=False):
     """Corner file to Magnet objects
 
     Args:
-        corner_file (str): *_corner.csv file.
-        moment_file (str): *_moments.csv file
+        corner_file (str): ``*_corner.csv`` file.
+        moment_file (str): ``*_moments.csv`` file.
         Br (float, optional): Magnetic remanence. Defaults to 1.4.
         reset (bool, optional): If reset the magnetic remanence based on Br. Defaults to False.
 
