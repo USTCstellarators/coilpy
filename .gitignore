@@ -15,8 +15,12 @@
 # vscode emp files
 .vscode
 
-# docs
-/docs
+# local environments and caches
+.venv/
+.mplconfig/
+
+# docs build output
+/docs/_build/
 
 # lib
 coilpy_fortran*.so

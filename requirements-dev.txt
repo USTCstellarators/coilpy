@@ -1,0 +1,14 @@
+numpy
+scipy
+xarray
+h5py
+matplotlib
+pandas
+plotly
+pyevtk
+classes
+f90nml
+meshio
+pytest
+sphinx
+pydata-sphinx-theme

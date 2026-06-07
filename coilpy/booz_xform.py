@@ -83,14 +83,14 @@ class BOOZ_XFORM(SortedDict):
         logical_not=False,
         **kwargs
     ):
-        """Plot |B| components 1D profile
+        """Plot :math:`|B|` components as a 1D profile.
 
         Args:
             ordering (integer, optional): Plot the leading Nordering asymmetric modes. Defaults to 0.
             mn (tuple, optional): Plot the particular (m,n) mode. Defaults to (None, None).
             ax (Matplotlib axis, optional): Matplotlib axis to be plotted on. Defaults to None.
             log (bool, optional): Plot in log scale. Defaults to True.
-            normalize(bool, optionl): Normalized to B_00. Defaults to True.
+            normalize(bool, optionl): Normalize to ``B_00``. Defaults to True.
             logical_not (bool, optional): Unselect mn modes. Defaults to False.
             kwargs (dict): Keyword arguments for matplotlib.pyplot.plot. Defaults to {}.
 
@@ -188,7 +188,7 @@ class BOOZ_XFORM(SortedDict):
         return ax
 
     def plot2d(self, ns=-1, npol=128, ntor=128, ax=None, contour=True, **kwargs):
-        """Plot |B| contour on the flux surface
+        """Plot :math:`|B|` contours on the flux surface.
 
         Args:
             ns (int, optional): Flux surface index in self.jlist. Defaults to -1.
