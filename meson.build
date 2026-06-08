@@ -1,4 +1,4 @@
-project('coilpy', 'c', version : '0.4.5',  meson_version: '>= 0.64.0',
+project('coilpy', 'c', version : '0.4.6',  meson_version: '>= 0.64.0',
 )
 
 add_languages('fortran', native: false)
