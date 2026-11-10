@@ -45,6 +45,15 @@ jobs:
       - name: Build Sphinx site
         run: sphinx-build -b html docs docs/_build/html
 
+      - name: Check rendered examples
+        run: |
+          for example in basic.html vmec_booz_xform.html Plot_with_plotly.html; do
+            test -s "docs/_build/html/examples/${example}" || {
+              echo "Missing rendered example: ${example}"
+              exit 1
+            }
+          done
+
       - name: Setup Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6.0.0

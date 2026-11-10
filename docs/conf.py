@@ -12,6 +12,9 @@
 #
 import os
 import sys
+from pathlib import Path
+
+from sphinx.util.fileutil import copy_asset
 
 sys.path.insert(0, os.path.abspath(".."))
 from coilpy import __version__
@@ -78,3 +81,16 @@ html_title = f"{project} {release}"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+
+def copy_examples(app, exception):
+    """Include rendered notebooks in every successful HTML build."""
+    if exception is None and app.builder.format == "html":
+        copy_asset(
+            str(Path(app.srcdir) / "examples"),
+            str(Path(app.outdir) / "examples"),
+        )
+
+
+def setup(app):
+    app.connect("build-finished", copy_examples)
