@@ -22,7 +22,6 @@ docs:
 	    perl -pi -e 's/(module|package)$$// if $$. == 1' $$f ;\
 	done
 	$(MAKE) html
-	cp -r examples $(BUILDDIR)/html
 
 gh-pages: docs
 	rm -rf /tmp/gh-pages	

@@ -34,7 +34,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6.2.0
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
       - name: Install documentation dependencies
         run: |
@@ -44,6 +44,15 @@ jobs:
 
       - name: Build Sphinx site
         run: sphinx-build -b html docs docs/_build/html
+
+      - name: Check rendered examples
+        run: |
+          for example in basic.html vmec_booz_xform.html Plot_with_plotly.html; do
+            test -s "docs/_build/html/examples/${example}" || {
+              echo "Missing rendered example: ${example}"
+              exit 1
+            }
+          done
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'
